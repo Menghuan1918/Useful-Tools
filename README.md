@@ -1,2 +1,9 @@
 # Useful-Tools
-Some useful applets/scripting tools, generally written in bash or python.一些实用的小程序/脚本工具，一般而言使用bash或者python编写。
+ENGlSH|[简体中文](./README_CN.md)
+
+Some useful applets/scripting tools, generally written in bash or python.
+
+
+## Coding
+
+[Quick compile and run lex file](Coding/flex/Run_flex_file.md)
