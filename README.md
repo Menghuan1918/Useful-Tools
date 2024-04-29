@@ -1,5 +1,10 @@
 # Useful-Tools
 
+![GitHub License](https://img.shields.io/github/license/Menghuan1918/Useful-Tools)
+![Static Badge](https://img.shields.io/badge/PRs-welcome-pink)
+![GitHub last commit](https://img.shields.io/github/last-commit/Menghuan1918/Useful-Tools)
+
+
 ENGlSH|[简体中文](./README_CN.md)
 
 Some useful applets/scripting tools, generally written in bash or python, no or only a small number of external libraries are used.
