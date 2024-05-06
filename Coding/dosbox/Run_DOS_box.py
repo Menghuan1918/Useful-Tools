@@ -5,6 +5,8 @@ import re
 
 way_to_edit = "nano"
 times_between_commands = 0.25
+start_command = ["dosbox"]
+# start_command = ["dosbox", "-c", "debug"]
 
 
 def setup_colors():
@@ -29,7 +31,10 @@ def multiple_choice(stdscr, window_id):
     while True:
         try:
             stdscr.addstr(
-                0, 0, "Please select the target window, press any key to launch a new DosBox window:", curses.color_pair(1)
+                0,
+                0,
+                "Please select the target window, press any key except `q` to launch a new DosBox window:",
+                curses.color_pair(1),
             )
             for i, name in enumerate(window_name):
                 if i == selected_index:
@@ -60,7 +65,7 @@ def multiple_choice(stdscr, window_id):
         elif key == ord("q"):
             return None
         else:
-            subprocess.Popen(["dosbox"])
+            subprocess.Popen(start_command)
             time.sleep(2)
             return -1
 
@@ -73,7 +78,7 @@ def get_window_id(stdscr):
             .strip()
         )
     except:
-        subprocess.Popen(["dosbox"])
+        subprocess.Popen(start_command)
         time.sleep(2)
         window_id = (
             subprocess.check_output(["xdotool", "search", "--name", "Dosbox"])
@@ -118,7 +123,8 @@ def main(stdscr):
                 subprocess.call([way_to_edit, "codes.txt"])
             except:
                 stdscr.addstr(
-                    f"Could not open the file, use the command: {way_to_edit} codes.txt", curses.color_pair(1)
+                    f"Could not open the file, use the command: {way_to_edit} codes.txt",
+                    curses.color_pair(1),
                 )
                 stdscr.refresh()
                 time.sleep(2)
@@ -127,8 +133,17 @@ def main(stdscr):
         elif choose in ["q", "Q"]:
             break
         else:
-            with open("codes.txt") as f:
-                commands = [line.strip() for line in f]
+            try:
+                with open("codes.txt") as f:
+                    commands = [line.strip() for line in f]
+            except:
+                stdscr.addstr(
+                    "Could not open the file, please create a file named codes.txt with the commands to run, return to the main menu in 5 seconds.",
+                    curses.color_pair(1),
+                )
+                stdscr.refresh()
+                time.sleep(5)
+                continue
             variables = {}
             for command in commands:
                 if re.search(r"%%\w+", command):
@@ -140,7 +155,7 @@ def main(stdscr):
             run_command = []
             for command in commands:
                 for variable, value in variables.items():
-                        command = command.replace(variable, value)
+                    command = command.replace(variable, value)
                 run_command.append(command)
             stdscr.clear()
             stdscr.refresh()

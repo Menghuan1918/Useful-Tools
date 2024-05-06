@@ -1,0 +1,11 @@
+A
+MOV AL,%%AL
+MOV BL,%%BL
+ADD AL,BL
+DAA
+
+R
+T
+T
+T
+T
