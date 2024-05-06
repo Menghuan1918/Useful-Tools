@@ -7,14 +7,16 @@ way_to_edit = "nano"
 times_between_commands = 0.25
 
 
-def multiple_choice(window_id):
-    stdscr = curses.initscr()
+def setup_colors():
     curses.start_color()
-    curses.curs_set(0)
-    curses.init_pair(1, curses.COLOR_RED, curses.COLOR_BLACK)
-    curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_BLACK)
-    curses.init_pair(3, curses.COLOR_BLUE, curses.COLOR_WHITE)
-    curses.init_pair(4, curses.COLOR_WHITE, curses.COLOR_BLACK)
+    curses.use_default_colors()
+    curses.init_pair(1, curses.COLOR_RED, -1)
+    curses.init_pair(2, curses.COLOR_GREEN, -1)
+    curses.init_pair(3, curses.COLOR_BLUE, -1)
+    curses.init_pair(4, curses.COLOR_WHITE, -1)
+
+
+def multiple_choice(stdscr, window_id):
     curses.curs_set(0)
     stdscr.clear()
     stdscr.refresh()
@@ -27,7 +29,7 @@ def multiple_choice(window_id):
     while True:
         try:
             stdscr.addstr(
-                0, 0, "Please select the target window,press any key to lauch a new DosBox window:", curses.color_pair(1)
+                0, 0, "Please select the target window, press any key to launch a new DosBox window:", curses.color_pair(1)
             )
             for i, name in enumerate(window_name):
                 if i == selected_index:
@@ -48,26 +50,22 @@ def multiple_choice(window_id):
         elif key == curses.KEY_DOWN and selected_index < len(window_id) - 1:
             selected_index += 1
         elif key == ord("\n") or key == curses.KEY_RIGHT:
-            curses.endwin()
             return window_id[selected_index]
         elif key == curses.KEY_UP and selected_index == 0:
             selected_index = len(window_id) - 1
         elif key == curses.KEY_DOWN and selected_index == len(window_id) - 1:
             selected_index = 0
         elif key == curses.KEY_LEFT:
-            curses.endwin()
             return None
         elif key == ord("q"):
-            curses.endwin()
             return None
         else:
-            curses.endwin()
-            subprocess.run(["dosbox"])
+            subprocess.Popen(["dosbox"])
             time.sleep(2)
             return -1
 
 
-def get_window_id():
+def get_window_id(stdscr):
     try:
         window_id = (
             subprocess.check_output(["xdotool", "search", "--name", "Dosbox"])
@@ -75,7 +73,7 @@ def get_window_id():
             .strip()
         )
     except:
-        p = subprocess.run(["dosbox"])
+        subprocess.Popen(["dosbox"])
         time.sleep(2)
         window_id = (
             subprocess.check_output(["xdotool", "search", "--name", "Dosbox"])
@@ -83,51 +81,76 @@ def get_window_id():
             .strip()
         )
     window_id = window_id.split("\n")
-    window_id_select = multiple_choice(window_id)
+    window_id_select = multiple_choice(stdscr, window_id)
     if not window_id_select:
         exit("No window selected")
     if window_id_select == -1:
-        window_id_select = get_window_id()
+        window_id_select = get_window_id(stdscr)
     return window_id_select
 
 
-def main():
-    print("Select the window to interact with:")
-    window_id = get_window_id()
+def input_dialog(stdscr, prompt):
+    stdscr.clear()
+    stdscr.addstr(prompt, curses.color_pair(2))
+    stdscr.refresh()
+    curses.echo()
+    user_input = stdscr.getstr(0, len(prompt))
+    curses.noecho()
+    return user_input.decode()
+
+
+def main(stdscr):
+    setup_colors()
+    stdscr.refresh()
+    window_id = get_window_id(stdscr)
 
     while True:
-        choose = input(
-"""
-e/E - Edit the enter code\n
-w/W - Reslect the window\n
-q/Q - Quit the program\n
-Any Other Key - Run the code\n
-"""
-        )
+        stdscr.clear()
+        stdscr.addstr("e/E - Edit the enter code\n", curses.color_pair(4))
+        stdscr.addstr("w/W - Reselect the window\n", curses.color_pair(4))
+        stdscr.addstr("q/Q - Quit the program\n", curses.color_pair(4))
+        stdscr.addstr("Any Other Key - Run the code\n", curses.color_pair(4))
+        stdscr.refresh()
+        choose = chr(stdscr.getch())
+
         if choose in ["e", "E"]:
             try:
                 subprocess.call([way_to_edit, "codes.txt"])
             except:
-                print(
-                    f"Could not open the file, use the command: {way_to_edit} codes.txt"
+                stdscr.addstr(
+                    f"Could not open the file, use the command: {way_to_edit} codes.txt", curses.color_pair(1)
                 )
+                stdscr.refresh()
+                time.sleep(2)
         elif choose in ["w", "W"]:
-            window_id = get_window_id()
+            window_id = get_window_id(stdscr)
         elif choose in ["q", "Q"]:
-            exit("Exiting the program")
+            break
         else:
             with open("codes.txt") as f:
-                commands = f.readlines()
+                commands = [line.strip() for line in f]
             variables = {}
             for command in commands:
-                if re.match(r"%%[\w+]",command):
-                    variable = re.match(r"%%([\w+])",command).group(1)
+                if re.search(r"%%\w+", command):
+                    variable = re.search(r"%%\w+", command).group(0)
                     if variable not in variables:
-                        variables[variable] = input(f"Please input the value of {variable}:")
-            commands = [re.sub(r"%%[\w+]",variables[variable],command) for command in commands]
+                        variables[variable] = input_dialog(
+                            stdscr, f"Please input the value of {variable}:"
+                        )
+            run_command = []
             for command in commands:
+                for variable, value in variables.items():
+                        command = command.replace(variable, value)
+                run_command.append(command)
+            stdscr.clear()
+            stdscr.refresh()
+            stdscr.addstr("Running the code...", curses.color_pair(2))
+            for command in run_command:
                 subprocess.call(["xdotool", "type", "--window", window_id, command])
                 subprocess.call(["xdotool", "key", "--window", window_id, "Return"])
                 time.sleep(times_between_commands)
 
-main()
+    curses.endwin()
+
+
+curses.wrapper(main)
