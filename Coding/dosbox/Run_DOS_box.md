@@ -33,3 +33,4 @@ MOV BL,%%BL
 
 where **%%BL** is a variable, and the program will ask you for the value of the variable each time it runs.
 
+![Like this](https://github.com/Menghuan1918/Useful-Tools/assets/122662527/8553eb4e-ed88-4551-9ad4-9b68a0a81004)
