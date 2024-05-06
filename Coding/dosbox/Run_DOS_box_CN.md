@@ -3,9 +3,9 @@
 
 
 > [!IMPORTANT]
-> 仅在**Linux**上生效，因为使用了`xdotool`对DOSBox发送按键。
-> 请确保你已经安装了`xdotool`，不过除此之外不需要任何别的依赖。
-> Ubuntu/Debian:`sudo apt install xdotool`
+> 仅在**Linux**上生效，因为使用了`xdotool`对DOSBox发送按键。  
+> 请确保你已经安装了`xdotool`，不过除此之外不需要任何别的依赖。  
+> Ubuntu/Debian:`sudo apt install xdotool`  
 > Arch/Manjaro:`sudo pacman -S xdotool`
 
 > 在`xdotool`已经安装的前提下，直接使用python运行Run_flex_file.py即可。

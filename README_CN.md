@@ -10,13 +10,16 @@
 
 ## 编程
 
-[快捷编译并运行lex文件](Coding/flex/Run_flex_file.md) 以当前文件夹为启动目录，选择当前文件夹下的子文件夹或lex文件，编译并运行。
+### [快捷编译并运行lex文件](Coding/flex/Run_flex_file.md) 
+以当前文件夹为启动目录，选择当前文件夹下的子文件夹或lex文件，编译并运行。
 
-[快捷地与DOSBox进行自动化交互(附带简单的变量功能)](Coding/dosbox/Run_DOS_box_CN.md) 在Linux上脚本化的形式与DOSBox交互。
+### [快捷地与DOSBox进行自动化交互(附带简单的变量功能)](Coding/dosbox/Run_DOS_box_CN.md) 
+在Linux上脚本化的形式与DOSBox交互。
 
 ## 文件处理
 
-[批量纠正文件的错误后缀名](Files/Type/Correct_extension.md) 批量地纠正文件的错误后缀名，例如明明是`webm`文件但后缀名却为`webp`。
+### [批量纠正文件的错误后缀名](Files/Type/Correct_extension.md) 
+批量地纠正文件的错误后缀名，例如明明是`webm`文件但后缀名却为`webp`。
 
 # 其他
 正在持续修改一些以前写的小程序并上传(它们之前写的并不怎么规范.....)。

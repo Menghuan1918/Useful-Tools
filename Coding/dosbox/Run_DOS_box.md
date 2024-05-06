@@ -4,9 +4,9 @@ English|[简体中文](Run_DOS_box_CN.md)
 ![Python 3.x](https://img.shields.io/badge/Python-3.X-blue) ![Static Badge](https://img.shields.io/badge/No%20external%20libraries-green) ![Static Badge](https://img.shields.io/badge/Linux-Available-grenn) ![Static Badge](https://img.shields.io/badge/Windows-Unavailable-red)
 
 > [!IMPORTANT]
-> Only works on **Linux** because `xdotool` is used to send keystrokes to the DOSBox.
-> Make sure you have `xdotool` installed, but other than that you don't need any other dependencies.
-> Ubuntu/Debian:`sudo apt install xdotool`
+> Only works on **Linux** because `xdotool` is used to send keystrokes to the DOSBox.  
+> Make sure you have `xdotool` installed, but other than that you don't need any other dependencies.  
+> Ubuntu/Debian:`sudo apt install xdotool`  
 > Arch/Manjaro:`sudo pacman -S xdotool`
 
 > Just run Run_DOS_box.py directly with python.

@@ -13,13 +13,20 @@ Generally, for ease of operation, the program is a single file and is designed t
 
 ## Coding
 
-[Quick compile and run lex file](Coding/flex/Run_flex_file.md) With the current folder as the startup directory, select a subfolder or lex file under the current folder, compile and run.
+### [Quick compile and run lex file](Coding/flex/Run_flex_file.md) 
 
-[Quick automated interaction with DOSBox (with simple variable feature)](Coding/dosbox/Run_DOS_box.md) Interact with DOSBox in scripted form on Linux.
+With the current folder as the startup directory, select a subfolder or lex file under the current folder, compile and run.
+
+
+### [Quick automated interaction with DOSBox (with simple variable feature)](Coding/dosbox/Run_DOS_box.md) 
+
+Interact with DOSBox in scripted form on Linux.
 
 ## File processing
 
-[Batch correction of incorrect file extensions](Files/Type/Correct_extension.md) Batch corrects files with incorrect suffixes, e.g. a file that is clearly a `webm` file but has a `webp` suffix.
+### [Batch correction of incorrect file extensions](Files/Type/Correct_extension.md) 
+
+Batch corrects files with incorrect suffixes, e.g. a file that is clearly a `webm` file but has a `webp` suffix.
 
 # Other
 Am continually revising some previously written applets and uploading them (they weren't really written in a standardised way before .....).
