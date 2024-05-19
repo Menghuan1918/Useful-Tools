@@ -9,7 +9,7 @@ Here are some results from my tests:
 
 |Company|Model Name|Fastest Token Rate|Slowest Token Rate|Average Token Rate|
 |---|---|---|---|---|
-|Ollama Local(3060M)|llama3|52.07|9.19|38.19|
+|Ollama Local(3060M)|llama3-8B|52.07|9.19|38.19|
 |OpenAI|gpt-3.5-turbo|72.85|13.55|37.48|
 |OpenAI|gpt-4o|84.97|11.43|49.25|
 |Claude|claude-3-sonnet-20240229|45.73|9.27|33.18|
