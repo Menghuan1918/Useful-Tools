@@ -16,6 +16,9 @@
 ### [快捷地与DOSBox进行自动化交互(附带简单的变量功能)](Coding/dosbox/Run_DOS_box_CN.md) 
 在Linux上脚本化的形式与DOSBox交互。
 
+### [测试OpenAI格式的API响应速度](Coding/llm/Speed_test_CN.md)
+附带我测试的ollama/openai/deepseek/yimodel/智谱/groq的速度
+
 ## 文件处理
 
 ### [批量纠正文件的错误后缀名](Files/Type/Correct_extension.md) 

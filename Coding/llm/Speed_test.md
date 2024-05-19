@@ -1,11 +1,11 @@
-# 一个测试LLM响应速度的小脚本
+# A small script to test LLM responsiveness.
 
-填入想要测试的Model_Name，Base_URL，API_KEY，Question，Tem即可。**仅支持OpenAI格式的API请求**。
+Just fill in the Model_Name, Base_URL, API_KEY, Question, Tem that you want to test. **Only API requests in OpenAI format are supported**.
 
-以下是我测试的一些结果：
+Here are some results from my tests:
 
 > [!IMPORTANT]
-> claude-3-sonnet-20240229并不支持OpenAI格式请求，我手动将其中转成了OpenAI格式完成的。
+> claude-3-sonnet-20240229 doesn't support OpenAI format requests, which I manually converted to OpenAI format to complete.
 
 |Company|Model Name|Fastest Token Rate|Slowest Token Rate|Average Token Rate|
 |---|---|---|---|---|

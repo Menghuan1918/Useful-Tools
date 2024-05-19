@@ -22,6 +22,10 @@ With the current folder as the startup directory, select a subfolder or lex file
 
 Interact with DOSBox in scripted form on Linux.
 
+### [Testing API response speed in OpenAI format](Coding/llm/Speed_test.md)
+
+Attached are the speeds of ollama/openai/deepseek/yimodel/wispspectrum/groq that I've tested
+
 ## File processing
 
 ### [Batch correction of incorrect file extensions](Files/Type/Correct_extension.md) 
